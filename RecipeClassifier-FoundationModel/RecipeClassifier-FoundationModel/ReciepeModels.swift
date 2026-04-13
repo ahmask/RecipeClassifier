@@ -2,19 +2,22 @@ import FoundationModels
 
 // MARK: - RecipeClassification
 //
-// The first thing the model generates — a quick cuisine classification.
-// This appears instantly (like the CoreML demo) while the full recipe
-// streams in below it.
+// Step 1 — the quick classification.
+// A small @Generable struct the model fills in instantly.
+// This is what powers the cuisine badge.
 
 @Generable
 struct RecipeClassification {
     @Guide(description: "The cuisine category: italian, mexican, asian, american, mediterranean, breakfast, dessert, or other")
     var category: String
+
+    @Guide(description: "The specific dish name that best matches the query")
+    var dishName: String
 }
 
 // MARK: - RecipeDetail
 //
-// The full recipe the model generates after calling GetRecipeDetailsTool.
+// Step 2 — the full recipe, generated after GetRecipeDetailsTool runs.
 //
 // Property order matters — the model generates properties top to bottom.
 // dishName appears first so the user sees it immediately.
@@ -37,4 +40,19 @@ struct RecipeDetail {
 
     @Guide(description: "Step-by-step cooking instructions. Each step should be a clear, complete sentence.")
     var steps: [String]
+}
+
+// MARK: - RecipeTagResult
+//
+// Used with the content tagging adapter.
+// Extracts dietary tags and key ingredients from the user's query.
+// For example: "spicy chicken with no dairy" → ["spicy", "chicken", "dairy-free"]
+
+@Generable
+struct RecipeTagResult {
+    @Guide(description: "Dietary or flavor tags detected in the query, e.g. vegetarian, spicy, gluten-free, dairy-free")
+    var dietaryTags: [String]
+
+    @Guide(description: "Key ingredients mentioned in the query")
+    var ingredients: [String]
 }

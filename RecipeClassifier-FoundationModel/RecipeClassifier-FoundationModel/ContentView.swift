@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var viewModel = RecipeViewModel()
+    @State private var taggingSession = RecipeTaggingSession()
     @State private var queryText = ""
     @FocusState private var inputFocused: Bool
 
@@ -18,7 +19,7 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
 
                         TextField(
-                            "e.g. How do I make tonkotsu ramen?",
+                            "e.g. Tiramisu",
                             text: $queryText,
                             axis: .vertical
                         )
@@ -44,6 +45,7 @@ struct ContentView: View {
                     .disabled(
                         queryText.trimmingCharacters(in: .whitespaces).isEmpty ||
                         viewModel.isLoading ||
+                        viewModel.isResponding ||   // prevent sending while model is generating
                         !viewModel.isAvailable
                     )
 
@@ -62,15 +64,24 @@ struct ContentView: View {
                             .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 12))
                     }
 
+                    // ── Content tagging result ─────────────────────────
+                    // Shows dietary tags and ingredients extracted from the query
+                    // using the content tagging adapter — a bonus feature that
+                    // runs in parallel with the main classify + stream flow.
+                    if let tags = taggingSession.tags {
+                        TagsView(tags: tags)
+                            .transition(.scale(scale: 0.85).combined(with: .opacity))
+                    }
+
                     // ── Classification badge ───────────────────────────
-                    // Appears instantly after the first respond() call,
-                    // just like the CoreML demo — while the recipe streams below.
+                    // Appears after Step 1 (respond) completes.
                     if let classification = viewModel.classification {
                         ClassificationBadgeView(category: classification.category)
                             .transition(.scale(scale: 0.85).combined(with: .opacity))
                     }
 
                     // ── Streaming recipe card ──────────────────────────
+                    // Appears and fills in progressively during Step 2.
                     if let recipe = viewModel.recipeDetail {
                         RecipeCardView(recipe: recipe)
                             .transition(.scale(scale: 0.92).combined(with: .opacity))
@@ -82,6 +93,7 @@ struct ContentView: View {
             }
             .animation(.spring(duration: 0.4), value: viewModel.classification?.category)
             .animation(.spring(duration: 0.4), value: viewModel.recipeDetail?.dishName)
+            .animation(.spring(duration: 0.3), value: taggingSession.tags?.dietaryTags.count)
             .navigationTitle("Recipe Assistant")
             .navigationBarTitleDisplayMode(.large)
         }
@@ -90,13 +102,47 @@ struct ContentView: View {
     private func submitQuery() {
         let trimmed = queryText.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
+        // Run tagging and main recipe flow in parallel
+        Task { await taggingSession.extractTags(from: trimmed) }
         Task { await viewModel.ask(query: trimmed) }
     }
 }
 
+// MARK: - Tags View
+
+struct TagsView: View {
+    let tags: RecipeTagResult
+
+    var allTags: [String] {
+        tags.dietaryTags + tags.ingredients
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Text("Detected from your query")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(allTags, id: \.self) { tag in
+                        Text(tag)
+                            .font(.caption.bold())
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 5)
+                            .background(.orange.opacity(0.15), in: Capsule())
+                            .foregroundStyle(.orange)
+                    }
+                }
+            }
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 16))
+    }
+}
+
 // MARK: - Classification Badge
-// Same concept as the CoreML demo result card, but now the model
-// classifies the cuisine too — no separate mlmodel file needed.
 
 struct ClassificationBadgeView: View {
     let category: String
