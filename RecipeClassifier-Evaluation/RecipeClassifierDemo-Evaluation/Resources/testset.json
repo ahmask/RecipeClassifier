@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "text": "How do I make authentic carbonara pasta?",
+    "label": "italian"
+  },
+  {
+    "id": 2,
+    "text": "What cheese is traditionally used in a Margherita pizza?",
+    "label": "italian"
+  },
+  {
+    "id": 3,
+    "text": "Can you share a simple recipe for homemade risotto?",
+    "label": "italian"
+  },
+  {
+    "id": 4,
+    "text": "How long should I cook lasagne in the oven?",
+    "label": "italian"
+  },
+  {
+    "id": 5,
+    "text": "What is the difference between penne and rigatoni?",
+    "label": "italian"
+  },
+  {
+    "id": 6,
+    "text": "How do I make tiramisu at home?",
+    "label": "italian"
+  },
+  {
+    "id": 7,
+    "text": "What wine pairs well with osso buco?",
+    "label": "italian"
+  },
+  {
+    "id": 8,
+    "text": "How do I get crispy skin on a chicken al mattone?",
+    "label": "italian"
+  },
+  {
+    "id": 9,
+    "text": "What is the secret to perfect arancini?",
+    "label": "italian"
+  },
+  {
+    "id": 10,
+    "text": "How do I make homemade guacamole?",
+    "label": "mexican"
+  },
+  {
+    "id": 11,
+    "text": "What is the best type of tortilla for fish tacos?",
+    "label": "mexican"
+  },
+  {
+    "id": 12,
+    "text": "How do I cook carnitas in a slow cooker?",
+    "label": "mexican"
+  },
+  {
+    "id": 13,
+    "text": "What spices go into an authentic mole sauce?",
+    "label": "mexican"
+  },
+  {
+    "id": 14,
+    "text": "How do I make fresh salsa verde?",
+    "label": "mexican"
+  },
+  {
+    "id": 15,
+    "text": "Can you give me a recipe for chicken enchiladas?",
+    "label": "mexican"
+  },
+  {
+    "id": 16,
+    "text": "What is the difference between a burrito and a chimichanga?",
+    "label": "mexican"
+  },
+  {
+    "id": 17,
+    "text": "How do I make elote (Mexican street corn)?",
+    "label": "mexican"
+  },
+  {
+    "id": 18,
+    "text": "What toppings are traditional on huevos rancheros?",
+    "label": "mexican"
+  },
+  {
+    "id": 19,
+    "text": "How do I make tonkotsu ramen broth from scratch?",
+    "label": "asian"
+  },
+  {
+    "id": 20,
+    "text": "What is the key to perfectly fluffy Japanese rice?",
+    "label": "asian"
+  },
+  {
+    "id": 21,
+    "text": "How do I roll sushi at home without a mat?",
+    "label": "asian"
+  },
+  {
+    "id": 22,
+    "text": "What vegetables work best in a stir-fry?",
+    "label": "asian"
+  },
+  {
+    "id": 23,
+    "text": "How do I make pad thai at home?",
+    "label": "asian"
+  },
+  {
+    "id": 24,
+    "text": "What is the difference between dim sum and dumplings?",
+    "label": "asian"
+  },
+  {
+    "id": 25,
+    "text": "How do I make kimchi at home?",
+    "label": "asian"
+  },
+  {
+    "id": 26,
+    "text": "Can you describe a simple recipe for congee?",
+    "label": "asian"
+  },
+  {
+    "id": 27,
+    "text": "What sauce is traditionally used in Peking duck?",
+    "label": "asian"
+  },
+  {
+    "id": 28,
+    "text": "How do I make a smash burger at home?",
+    "label": "american"
+  },
+  {
+    "id": 29,
+    "text": "What wood chips are best for smoking brisket?",
+    "label": "american"
+  },
+  {
+    "id": 30,
+    "text": "How do I make creamy mac and cheese from scratch?",
+    "label": "american"
+  },
+  {
+    "id": 31,
+    "text": "What is the best way to make crispy fried chicken?",
+    "label": "american"
+  },
+  {
+    "id": 32,
+    "text": "How do I make a classic New York cheesecake?",
+    "label": "american"
+  },
+  {
+    "id": 33,
+    "text": "What cut of meat is best for pulled pork?",
+    "label": "american"
+  },
+  {
+    "id": 34,
+    "text": "How do I make thick-cut onion rings?",
+    "label": "american"
+  },
+  {
+    "id": 35,
+    "text": "What is the traditional recipe for clam chowder?",
+    "label": "american"
+  },
+  {
+    "id": 36,
+    "text": "How do I season a cast-iron skillet properly?",
+    "label": "american"
+  },
+  {
+    "id": 37,
+    "text": "How do I make hummus from scratch?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 38,
+    "text": "What herbs go into a traditional Greek salad?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 39,
+    "text": "How do I make falafel that holds together?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 40,
+    "text": "Can you share a shakshuka recipe?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 41,
+    "text": "What is the difference between tzatziki and labneh?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 42,
+    "text": "How do I make tabbouleh salad?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 43,
+    "text": "What is the secret to a good moussaka?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 44,
+    "text": "How do I grill halloumi without it sticking?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 45,
+    "text": "What goes into a traditional fattoush salad?",
+    "label": "mediterranean"
+  },
+  {
+    "id": 46,
+    "text": "How do I make a fluffy French omelette?",
+    "label": "breakfast"
+  },
+  {
+    "id": 47,
+    "text": "What is the trick to making perfect pancakes every time?",
+    "label": "breakfast"
+  },
+  {
+    "id": 48,
+    "text": "How do I poach eggs so they keep their shape?",
+    "label": "breakfast"
+  },
+  {
+    "id": 49,
+    "text": "Can you give me a recipe for homemade granola?",
+    "label": "breakfast"
+  },
+  {
+    "id": 50,
+    "text": "How do I make avocado toast with a soft-boiled egg?",
+    "label": "breakfast"
+  },
+  {
+    "id": 51,
+    "text": "What is the difference between a frittata and a quiche?",
+    "label": "breakfast"
+  },
+  {
+    "id": 52,
+    "text": "How do I make eggs Benedict at home?",
+    "label": "breakfast"
+  },
+  {
+    "id": 53,
+    "text": "Can you share a recipe for overnight oats?",
+    "label": "breakfast"
+  },
+  {
+    "id": 54,
+    "text": "How do I make crispy hash browns from scratch?",
+    "label": "breakfast"
+  },
+  {
+    "id": 55,
+    "text": "How do I make chocolate lava cake?",
+    "label": "dessert"
+  },
+  {
+    "id": 56,
+    "text": "What is the secret to a smooth creme brulee?",
+    "label": "dessert"
+  },
+  {
+    "id": 57,
+    "text": "How do I temper chocolate for dipping?",
+    "label": "dessert"
+  },
+  {
+    "id": 58,
+    "text": "Can you share a recipe for classic chocolate chip cookies?",
+    "label": "dessert"
+  },
+  {
+    "id": 59,
+    "text": "How do I make a no-bake cheesecake?",
+    "label": "dessert"
+  },
+  {
+    "id": 60,
+    "text": "What is the difference between sorbet and gelato?",
+    "label": "dessert"
+  },
+  {
+    "id": 61,
+    "text": "How do I make a perfect choux pastry for eclairs?",
+    "label": "dessert"
+  },
+  {
+    "id": 62,
+    "text": "Can you give me a recipe for banana bread?",
+    "label": "dessert"
+  },
+  {
+    "id": 63,
+    "text": "How do I make caramel sauce without it crystallising?",
+    "label": "dessert"
+  },
+  {
+    "id": 64,
+    "text": "How many calories should I eat per day?",
+    "label": "other"
+  },
+  {
+    "id": 65,
+    "text": "What is the history of French cuisine?",
+    "label": "other"
+  },
+  {
+    "id": 66,
+    "text": "Can I substitute butter with oil in all recipes?",
+    "label": "other"
+  },
+  {
+    "id": 67,
+    "text": "How do I read a recipe in metric measurements?",
+    "label": "other"
+  },
+  {
+    "id": 68,
+    "text": "What is the difference between baking powder and baking soda?",
+    "label": "other"
+  },
+  {
+    "id": 69,
+    "text": "How do I convert Celsius to Fahrenheit for oven temperatures?",
+    "label": "other"
+  },
+  {
+    "id": 70,
+    "text": "What kitchen knives should a home cook own?",
+    "label": "other"
+  },
+  {
+    "id": 71,
+    "text": "How do I clean a cast-iron pan after cooking?",
+    "label": "other"
+  },
+  {
+    "id": 72,
+    "text": "What is the Maillard reaction?",
+    "label": "other"
+  }
+]
