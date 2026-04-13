@@ -1,3 +1,4 @@
+import Observation
 import SwiftUI
 import FoundationModels
 
@@ -5,15 +6,21 @@ import FoundationModels
 @MainActor
 class RecipeViewModel {
 
-    // Classification result — appears instantly, just like the CoreML demo
+    // Step 1 result — classification badge
     var classification: RecipeClassification?
 
-    // Streaming recipe — fills in progressively after classification
+    // Step 2 result — streaming recipe card
     var recipeDetail: RecipeDetail.PartiallyGenerated?
 
     var isAvailable: Bool = false
     var isLoading: Bool = false
     var errorMessage: String?
+
+    // Expose session.isResponding to the UI so we can disable
+    // the Ask button while the model is generating
+    var isResponding: Bool {
+        session?.isResponding ?? false
+    }
 
     private var session: LanguageModelSession?
 
@@ -32,7 +39,7 @@ class RecipeViewModel {
                 instructions: """
                     You are a friendly and knowledgeable cooking assistant.
                     When the user asks about a recipe or how to make a dish,
-                    always use the getRecipeDetails tool to fetch the full recipe.
+                    always use the getRecipeDetails tool to fetch the recipe.
                     Keep your responses focused on cooking and food.
                     Be warm, encouraging, and enthusiastic about cooking.
                     If the user asks a follow-up like "make it vegetarian" or
@@ -40,6 +47,11 @@ class RecipeViewModel {
                     and call getRecipeDetails again with the updated dish name.
                     """
             )
+            // prewarm() loads the model in the background immediately,
+            // so the first response feels fast instead of loading cold.
+            // Think of it as preheating the oven before you cook.
+            Task { try? await session?.prewarm() }
+
         case .unavailable(let reason):
             isAvailable = false
             errorMessage = unavailabilityMessage(for: reason)
@@ -59,19 +71,24 @@ class RecipeViewModel {
         errorMessage = nil
 
         do {
-            // Step 1 — Classify the cuisine instantly (same feel as the CoreML demo)
-            // This is a single fast respond() call, not streaming.
+            // Step 1 — classify instantly
+            // respond() waits for the full result, which is tiny and fast.
+            // The badge appears as soon as this returns.
             let classifyResponse = try await session.respond(
                 to: trimmed,
                 generating: RecipeClassification.self
             )
             classification = classifyResponse.content
 
-            // Step 2 — Stream the full recipe details
-            // The session remembers the classification exchange above,
-            // so the model has full context when generating the recipe.
+            // Step 2 — stream the full recipe
+            // The prompt includes the actual dish name from Step 1 —
+            // always be specific, never vague. Vague prompts risk
+            // triggering the model's safety guardrails.
+            // The session remembers Step 1 in its transcript,
+            // giving the model full context for this step.
+            let dishName = classifyResponse.content.dishName ?? trimmed
             let stream = session.streamResponse(
-                to: "Now provide the full recipe details for the dish.",
+                to: "Generate a full recipe for \(dishName).",
                 generating: RecipeDetail.self
             )
 
@@ -90,7 +107,7 @@ class RecipeViewModel {
 
     private func friendlyError(_ error: Error) -> String {
         let description = error.localizedDescription.lowercased()
-        if description.contains("guardrail") {
+        if description.contains("guardrail") || description.contains("unsafe") {
             return "That request isn't something I can help with. Try asking about a recipe!"
         } else if description.contains("context") || description.contains("window") {
             return "The conversation has gotten too long. Please start a new one."
