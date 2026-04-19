@@ -4,7 +4,7 @@ import SwiftUI
 struct RecipeClassifierDemo_EvaluationApp: App {
     var body: some Scene {
         WindowGroup {
-            EvaluationView()
+            RootTabView()
         }
     }
 }
