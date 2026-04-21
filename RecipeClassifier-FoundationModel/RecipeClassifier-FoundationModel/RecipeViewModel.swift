@@ -50,7 +50,7 @@ class RecipeViewModel {
             // prewarm() loads the model in the background immediately,
             // so the first response feels fast instead of loading cold.
             // Think of it as preheating the oven before you cook.
-            Task { try? await session?.prewarm() }
+            session?.prewarm()
 
         case .unavailable(let reason):
             isAvailable = false

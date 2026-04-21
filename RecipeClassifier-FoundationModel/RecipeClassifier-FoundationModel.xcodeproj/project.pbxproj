@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		B24265412F8CFF5D0060AF65 /* RecipeClassifier-FoundationModel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "RecipeClassifier-FoundationModel.app"; path = "/Users/U777546/Work/ondevice-repos/RecipeClassifier/RecipeClassifier-FoundationModel/build/Debug-iphoneos/RecipeClassifier-FoundationModel.app"; sourceTree = "<absolute>"; };
+		B24F33062F9823290018C86E /* RecipeClassifier-FoundationModel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "RecipeClassifier-FoundationModel.app"; path = "/Users/U777546/Work/ondevice-repos/RecipeClassifier/RecipeClassifier-FoundationModel/build/Debug-iphoneos/RecipeClassifier-FoundationModel.app"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -58,7 +58,7 @@
 			packageProductDependencies = (
 			);
 			productName = "RecipeClassifier-FoundationModel";
-			productReference = B24265412F8CFF5D0060AF65 /* RecipeClassifier-FoundationModel.app */;
+			productReference = B24F33062F9823290018C86E /* RecipeClassifier-FoundationModel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
