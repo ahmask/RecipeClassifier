@@ -1,5 +1,5 @@
 import Foundation
-import MetricKitML
+import EvalKit
 
 /// Aggregates EvaluationResults into a structured EvaluationReport.
 ///

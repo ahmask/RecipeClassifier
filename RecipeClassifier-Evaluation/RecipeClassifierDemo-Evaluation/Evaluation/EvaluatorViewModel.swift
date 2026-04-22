@@ -1,7 +1,7 @@
 import Combine
 import SwiftUI
 import FoundationModels
-import MetricKitML
+import EvalKit
 
 /// Orchestrates the evaluation pipeline for both model paths.
 ///

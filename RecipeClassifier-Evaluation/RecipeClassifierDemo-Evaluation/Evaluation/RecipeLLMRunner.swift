@@ -1,6 +1,6 @@
 import Foundation
 import FoundationModels
-import MetricKitML
+import EvalKit
 
 /// EvaluationRunner for the Apple Foundation Models path.
 ///

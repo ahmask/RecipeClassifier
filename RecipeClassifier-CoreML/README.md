@@ -51,13 +51,11 @@ Inference runs on the Neural Engine at under 1 ms per query.
 2. Create a new **Text Classifier** project named `RecipeClassifier`
 3. Load `training_data.csv` as training data
 4. Optionally load `test_data.csv` as test data for an in-tool accuracy check
-5. Train with **Maximum Entropy** (or switch to **Transfer Learning** for better accuracy)
+5. Train with **Maximum Entropy** (fast, good for iteration) or **Transfer Learning** (higher accuracy, takes 1–2 minutes)
 6. Export from the **Output** tab and drag into the Xcode project target
-
-Full step-by-step instructions: see the [CoreML training tutorial](../coreml_training_tutorial.md).
 
 ---
 
 ## Evaluating the model properly
 
-`test_data.csv` gives you a quick accuracy check inside Create ML. For a full benchmark — macro F1, per-class recall, P90 latency, and a pass/fail verdict — see [RecipeClassifierDemo-Evaluation](../RecipeClassifierDemo-Evaluation) and the [MetricKitML tutorial](../metrickitml_tutorial.md).
+`test_data.csv` gives you a quick accuracy check inside Create ML. For a full benchmark — macro F1, per-class recall, P90 latency, and a pass/fail verdict — see [RecipeClassifier-Evaluation](../RecipeClassifier-Evaluation) and [EvalKit](https://github.com/ahmask/EvalKit).

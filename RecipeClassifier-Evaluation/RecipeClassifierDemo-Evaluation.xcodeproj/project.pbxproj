@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2B2C9F42F8A4F3300686F0F /* MetricKitML in Frameworks */ = {isa = PBXBuildFile; productRef = B2B2C9F32F8A4F3300686F0F /* MetricKitML */; };
-		B2B2C9F62F8A4F3300686F0F /* MetricKitMLCoreML in Frameworks */ = {isa = PBXBuildFile; productRef = B2B2C9F52F8A4F3300686F0F /* MetricKitMLCoreML */; };
+		B2B2C9F42F8A4F3300686F0F /* EvalKit in Frameworks */ = {isa = PBXBuildFile; productRef = B2B2C9F32F8A4F3300686F0F /* EvalKit */; };
+		B2B2C9F62F8A4F3300686F0F /* EvalKitCoreML in Frameworks */ = {isa = PBXBuildFile; productRef = B2B2C9F52F8A4F3300686F0F /* EvalKitCoreML */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2B2C9F62F8A4F3300686F0F /* MetricKitMLCoreML in Frameworks */,
-				B2B2C9F42F8A4F3300686F0F /* MetricKitML in Frameworks */,
+				B2B2C9F62F8A4F3300686F0F /* EvalKitCoreML in Frameworks */,
+				B2B2C9F42F8A4F3300686F0F /* EvalKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,8 +72,8 @@
 			);
 			name = "RecipeClassifierDemo-Evaluation";
 			packageProductDependencies = (
-				B2B2C9F32F8A4F3300686F0F /* MetricKitML */,
-				B2B2C9F52F8A4F3300686F0F /* MetricKitMLCoreML */,
+				B2B2C9F32F8A4F3300686F0F /* EvalKit */,
+				B2B2C9F52F8A4F3300686F0F /* EvalKitCoreML */,
 			);
 			productName = "RecipeClassifierDemo-Evaluation";
 			productReference = B2B2C98D2F8A4CD500686F0F /* RecipeClassifierDemo-Evaluation.app */;
@@ -104,7 +104,7 @@
 			mainGroup = B2B2C9842F8A4CD400686F0F;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "MetricKitML" */,
+				B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "EvalKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B2B2C98E2F8A4CD500686F0F /* Products */;
@@ -344,9 +344,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "MetricKitML" */ = {
+		B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "EvalKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ahmask/MetricKitML";
+			repositoryURL = "https://github.com/ahmask/EvalKit";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
@@ -355,15 +355,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B2B2C9F32F8A4F3300686F0F /* MetricKitML */ = {
+		B2B2C9F32F8A4F3300686F0F /* EvalKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "MetricKitML" */;
-			productName = MetricKitML;
+			package = B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "EvalKit" */;
+			productName = EvalKit;
 		};
-		B2B2C9F52F8A4F3300686F0F /* MetricKitMLCoreML */ = {
+		B2B2C9F52F8A4F3300686F0F /* EvalKitCoreML */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "MetricKitML" */;
-			productName = MetricKitMLCoreML;
+			package = B2B2C9F12F8A4EE600686F0F /* XCRemoteSwiftPackageReference "EvalKit" */;
+			productName = EvalKitCoreML;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,8 +1,6 @@
 # RecipeClassifier-FoundationModel
 
-A companion project to **Tutorial 2** of the *Experimenting with Apple ML* series.
-
-This app takes the `RecipeClassifierDemo` CoreML project from Tutorial 1 and rebuilds it using Apple's **Foundation Models framework** (iOS 26), covering every major feature from WWDC 2025 Session 286.
+This app takes the recipe classifier from [RecipeClassifier-CoreML](../RecipeClassifier-CoreML) and rebuilds it using Apple's **Foundation Models framework** (iOS 26). Instead of a trained text classifier, it uses the on-device language model to classify the cuisine, then streams a full recipe word by word.
 
 ---
 

@@ -1,6 +1,6 @@
 # RecipeClassifierDemo-Evaluation
 
-The evaluation companion to [RecipeClassifierDemo](https://github.com/ahmask/RecipeClassifierDemo). Where that project shows the model running in an app, this one measures how well it actually performs — accuracy, macro F1, per-class breakdown, P90 latency, and a pass/fail verdict — using [MetricKitML](https://github.com/ahmask/MetricKitML).
+The evaluation companion to [RecipeClassifierDemo](https://github.com/ahmask/RecipeClassifierDemo). Where that project shows the model running in an app, this one measures how well it actually performs — accuracy, macro F1, per-class breakdown, P90 latency, and a pass/fail verdict — using [EvalKit](https://github.com/ahmask/EvalKit).
 
 It evaluates both a CoreML classifier and an on-device Foundation Models path side-by-side against the same 72-example test set.
 
@@ -29,7 +29,7 @@ It evaluates both a CoreML classifier and an on-device Foundation Models path si
 - Xcode 16.2 or later
 - iOS 18.0+ deployment target (Foundation Models path requires iOS 26+ with Apple Intelligence)
 - Swift 6 concurrency enabled
-- [MetricKitML](https://github.com/ahmask/MetricKitML) — added automatically via SPM
+- [EvalKit](https://github.com/ahmask/EvalKit) — added automatically via SPM
 
 ---
 
@@ -65,7 +65,7 @@ RecipeClassifierDemo          — train + ship the model
 RecipeClassifierDemo-Evaluation  — measure how well it works  ← you are here
 ```
 
-Start with the [CoreML training tutorial](../coreml_training_tutorial.md) to train and export `RecipeClassifier.mlmodel`, then follow the [MetricKitML tutorial](../metrickitml_tutorial.md) to understand how this evaluation project is built.
+Train and export `RecipeClassifier.mlmodel` using Create ML (see [RecipeClassifier-CoreML](../RecipeClassifier-CoreML)), then open this project to measure how well it actually performs.
 
 ---
 
@@ -82,5 +82,5 @@ Start with the [CoreML training tutorial](../coreml_training_tutorial.md) to tra
 ## Related
 
 - [RecipeClassifierDemo](https://github.com/ahmask/RecipeClassifierDemo) — the simple classify demo
-- [MetricKitML](https://github.com/ahmask/MetricKitML) — the Swift package this project depends on
-- [MetricKitML tutorial](../metrickitml_tutorial.md) — step-by-step guide to building this from scratch
+- [EvalKit](https://github.com/ahmask/EvalKit) — the Swift package this project depends on
+- [EvalKit](https://github.com/ahmask/EvalKit) — the Swift package this project depends on

@@ -16,10 +16,10 @@ A minimal iOS app that classifies food and recipe queries on-device using a Core
 
 ### [`RecipeClassifier-Evaluation`](./RecipeClassifier-Evaluation)
 
-Measures how well the CoreML model actually performs — accuracy, macro F1, per-class breakdown, P90 latency, and a pass/fail verdict — using [MetricKitML](https://github.com/ahmask/MetricKitML). Also evaluates a Foundation Models path side-by-side against the same test set.
+Measures how well the CoreML model actually performs — accuracy, macro F1, per-class breakdown, P90 latency, and a pass/fail verdict — using [EvalKit](https://github.com/ahmask/EvalKit). Also evaluates a Foundation Models path side-by-side against the same test set.
 
 - Requires iOS 18.0+ (Foundation Models path requires iOS 26+ with Apple Intelligence)
-- Uses Swift Package Manager to pull in MetricKitML automatically
+- Uses Swift Package Manager to pull in EvalKit automatically
 
 ### [`RecipeClassifier-FoundationModel`](./RecipeClassifier-FoundationModel)
 
@@ -47,5 +47,5 @@ RecipeClassifier-FoundationModel — rebuild with Foundation Models, stream full
 | Project | Xcode | iOS | Notes |
 |---|---|---|---|
 | RecipeClassifier-CoreML | 15+ | 18.0+ | No Swift packages |
-| RecipeClassifier-Evaluation | 16.2+ | 18.0+ | MetricKitML via SPM; Foundation Models path needs iOS 26 |
+| RecipeClassifier-Evaluation | 16.2+ | 18.0+ | EvalKit via SPM; Foundation Models path needs iOS 26 |
 | RecipeClassifier-FoundationModel | 26+ | 26+ | Real device with Apple Intelligence required |
