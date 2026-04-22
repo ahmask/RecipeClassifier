@@ -1,8 +1,8 @@
 import Foundation
 import CoreML
 @preconcurrency import NaturalLanguage
-import MetricKitML
-import MetricKitMLCoreML
+import EvalKit
+import EvalKitCoreML
 
 /// EvaluationRunner that classifies food/recipe queries using RecipeClassifier.mlmodel.
 ///

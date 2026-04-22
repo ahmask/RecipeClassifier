@@ -1,5 +1,5 @@
 import SwiftUI
-import MetricKitML
+import EvalKit
 
 // MARK: - Error banner
 

@@ -1,5 +1,5 @@
 import SwiftUI
-import MetricKitML
+import EvalKit
 
 /// Root view — shows two evaluation paths: CoreML and Foundation Models.
 ///
