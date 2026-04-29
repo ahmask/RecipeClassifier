@@ -12,7 +12,7 @@ A minimal iOS app that classifies food and recipe queries on-device using a Core
 
 - 8 categories: `italian` · `mexican` · `asian` · `american` · `mediterranean` · `breakfast` · `dessert` · `other`
 - Inference under 1 ms, no network, no API key
-- Includes `training_data.csv` (72 examples) and `test_data.csv` (24 held-out examples)
+- Includes `training_data.csv` (192 examples) and `test_data.csv` (24 held-out examples)
 
 ### [`RecipeClassifier-Evaluation`](./RecipeClassifier-Evaluation)
 
