@@ -39,6 +39,9 @@ jobs:
       - name: Write Job Summary
         if: always()
         run: |
+          echo "=== BUILD LOG CONTENT ===" >> $GITHUB_STEP_SUMMARY
+          cat build.log >> $GITHUB_STEP_SUMMARY
+
           echo "## 📊 EvalKit Evaluation Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
