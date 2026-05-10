@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: macos-26
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 26.0
+        run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
+
+      - name: Install xcpretty
+        run: gem install xcpretty
+
+      - name: Build and Test
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project RecipeClassifier-Evaluation/RecipeClassifierDemo-Evaluation.xcodeproj \
+            -scheme RecipeClassifierDemo-Evaluation \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.0' \
+            -resultBundlePath TestResults.xcresult \
+            CODE_SIGNING_ALLOWED=NO \
+            | xcpretty
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: TestResults.xcresult
