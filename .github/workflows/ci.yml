@@ -62,19 +62,6 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Verdict: ${VERDICT:-See test logs}**" >> $GITHUB_STEP_SUMMARY
 
-      - name: Generate HTML Report
-        if: always()
-        run: |
-          xcrun xcresulttool get \
-            --path TestResults.xcresult \
-            --format json > results.json
-
-          npm install -g xunit-viewer
-          xunit-viewer \
-            --results results.json \
-            --output TestReport.html \
-            --title "RecipeClassifier Evaluation Results"
-
       - name: Upload Test Results
         if: always()
         uses: actions/upload-artifact@v4
