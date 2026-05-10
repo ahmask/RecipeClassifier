@@ -36,9 +36,27 @@ jobs:
         env:
           NSUnbufferedIO: YES
 
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v4
+      - name: Generate HTML Report
         if: always()
+        run: |
+          xcrun xccov view \
+            --report --json TestResults.xcresult > coverage.json
+
+          xcrun xcresulttool get \
+            --path TestResults.xcresult \
+            --format json > results.json
+
+          npm install -g xunit-viewer
+          xunit-viewer \
+            --results results.json \
+            --output TestReport.html \
+            --title "RecipeClassifier Evaluation Results"
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: test-results
-          path: TestResults.xcresult
+          name: TestResults
+          path: |
+            TestResults.xcresult
+            TestReport.html
