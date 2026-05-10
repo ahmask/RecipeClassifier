@@ -20,16 +20,21 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
 
+      - name: Install iOS Simulator Runtime
+        run: |
+          sudo xcodebuild -downloadPlatform iOS
+
       - name: Build and Test
         run: |
-          set -o pipefail
           xcodebuild test \
-            -project RecipeClassifier-Evaluation/RecipeClassifierDemo-Evaluation.xcodeproj \
-            -scheme RecipeClassifierDemo-Evaluation \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -project "RecipeClassifier-Evaluation/RecipeClassifierDemo-Evaluation.xcodeproj" \
+            -scheme "RecipeClassifierDemo-Evaluation" \
+            -destination "platform=iOS Simulator,name=iPhone 16" \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
+        env:
+          NSUnbufferedIO: YES
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
