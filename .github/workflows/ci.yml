@@ -39,9 +39,6 @@ jobs:
       - name: Generate HTML Report
         if: always()
         run: |
-          xcrun xccov view \
-            --report --json TestResults.xcresult > coverage.json
-
           xcrun xcresulttool get \
             --path TestResults.xcresult \
             --format json > results.json
