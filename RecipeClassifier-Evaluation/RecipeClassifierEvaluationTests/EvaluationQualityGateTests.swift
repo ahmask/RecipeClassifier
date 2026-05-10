@@ -44,6 +44,41 @@ final class EvaluationQualityGateTests: XCTestCase {
 
         let reporter = StandardClassificationReporter(minimumAccuracy: 0.85)
         let report   = reporter.report(from: results, featureName: "RecipeClassifier (CoreML)")
+
+        let m = report.metrics
+        let verdict = report.passedBaseline ? "✅ PASSED" : "❌ FAILED"
+
+        print("")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("📊 EVALKIT REPORT — \(report.featureName)")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("  Total Cases     : \(m.totalCases)")
+        print("  Passed Cases    : \(report.passCount)")
+        print("  Error Count     : \(m.errorCount)")
+        print("")
+        if let accuracy = m.accuracy {
+            print("  Accuracy        : \(String(format: "%.1f%%", accuracy * 100))")
+        }
+        if let precision = m.macroPrecision {
+            print("  Precision (macro): \(String(format: "%.1f%%", precision * 100))")
+        }
+        if let recall = m.macroRecall {
+            print("  Recall (macro)  : \(String(format: "%.1f%%", recall * 100))")
+        }
+        if let f1 = m.macroF1 {
+            print("  F1 (macro)      : \(String(format: "%.1f%%", f1 * 100))")
+        }
+        print("")
+        print("  Latency Mean    : \(String(format: "%.1f", m.latencyMsMean))ms")
+        print("  Latency P90     : \(String(format: "%.1f", m.latencyMsP90))ms")
+        if let baseline = report.baselineDescription {
+            print("  Baseline        : \(baseline)")
+        }
+        print("")
+        print("  Verdict         : \(verdict)")
+        print("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        print("")
+
         XCTAssert(report.passedBaseline, "CoreML accuracy fell below 85 % baseline: \(report.baselineDescription ?? "")")
     }
 
