@@ -42,7 +42,7 @@ final class EvaluationQualityGateTests: XCTestCase {
             results.append(try await runner.run(testCase))
         }
 
-        let reporter = StandardClassificationReporter(minimumAccuracy: 0.85)
+        let reporter = StandardClassificationReporter(minimumAccuracy: 0.85, labels: FoodCategory.allRawValues)
         let report   = reporter.report(from: results, featureName: "RecipeClassifier (CoreML)")
 
         let m = report.metrics
@@ -97,7 +97,7 @@ final class EvaluationQualityGateTests: XCTestCase {
             results.append(try await runner.run(testCase))
         }
 
-        let reporter = StandardClassificationReporter(minimumAccuracy: 0.80)
+        let reporter = StandardClassificationReporter(minimumAccuracy: 0.80, labels: FoodCategory.allRawValues)
         let report   = reporter.report(from: results, featureName: "RecipeClassifier (Foundation Model)")
         XCTAssert(report.passedBaseline, "Foundation Model accuracy fell below 80 % baseline: \(report.baselineDescription ?? "")")
     }
