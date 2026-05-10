@@ -26,7 +26,7 @@ jobs:
           xcodebuild test \
             -project RecipeClassifier-Evaluation/RecipeClassifierDemo-Evaluation.xcodeproj \
             -scheme RecipeClassifierDemo-Evaluation \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=26.0' \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             | xcpretty
