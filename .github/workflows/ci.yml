@@ -32,7 +32,7 @@ jobs:
             -destination "platform=iOS Simulator,name=iPhone 16" \
             -resultBundlePath TestResults.xcresult \
             CODE_SIGNING_ALLOWED=NO \
-            | tee build.log | xcpretty
+            2>&1 | tee build.log | xcpretty
         env:
           NSUnbufferedIO: YES
 
