@@ -7,34 +7,22 @@ final class EvaluationQualityGateTests: XCTestCase {
 
     // MARK: - Test Data
 
-    /// Loads test cases from test_data.csv, located one directory above this file.
-    private func loadCSVCases() throws -> [RecipeClassificationCase] {
-        let csvURL = URL(fileURLWithPath: #filePath)
+    /// Loads test cases from testset.json — the same file the app bundles and uses on device.
+    private func loadTestCases() throws -> [RecipeClassificationCase] {
+        let jsonURL = URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()          // RecipeClassifierEvaluationTests/
             .deletingLastPathComponent()          // RecipeClassifier-Evaluation/
-            .appendingPathComponent("test_data.csv")
+            .appendingPathComponent("RecipeClassifierDemo-Evaluation/Resources/testset.json")
 
-        let raw = try String(contentsOf: csvURL, encoding: .utf8)
-        var cases: [RecipeClassificationCase] = []
-
-        // Skip header row; split each line at the last comma so texts that
-        // contain commas are handled correctly.
-        for (index, line) in raw.components(separatedBy: .newlines).dropFirst().enumerated() {
-            guard !line.isEmpty,
-                  let commaRange = line.range(of: ",", options: .backwards) else { continue }
-            let text  = String(line[line.startIndex ..< commaRange.lowerBound])
-            let label = String(line[commaRange.upperBound...])
-            let example = LabeledExample(id: index, text: text, label: label)
-            cases.append(RecipeClassificationCase(example: example))
-        }
-
-        return cases
+        let data     = try Data(contentsOf: jsonURL)
+        let examples = try JSONDecoder().decode([LabeledExample].self, from: data)
+        return examples.map { RecipeClassificationCase(example: $0) }
     }
 
     // MARK: - CoreML
 
     func testCoreMLModelMeetsBaseline() async throws {
-        let cases  = try loadCSVCases()
+        let cases  = try loadTestCases()
         let runner = RecipeClassificationRunner()
 
         var results: [EvaluationResult] = []
@@ -89,7 +77,7 @@ final class EvaluationQualityGateTests: XCTestCase {
             throw XCTSkip("Foundation Models not available on this machine")
         }
 
-        let cases  = try loadCSVCases()
+        let cases  = try loadTestCases()
         let runner = RecipeLLMRunner()
 
         var results: [EvaluationResult] = []
