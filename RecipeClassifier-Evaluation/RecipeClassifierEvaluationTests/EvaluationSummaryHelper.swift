@@ -16,7 +16,7 @@ struct EvaluationSummaryHelper {
             .deletingLastPathComponent()
             .appendingPathComponent("RecipeClassifierDemo-Evaluation/Resources/testset.json")
 
-        let data     = try! Data(contentsOf: jsonURL)
+        let data    = try! Data(contentsOf: jsonURL)
         let examples = try! JSONDecoder().decode([LabeledExample].self, from: data)
         return RecipeClassificationCase(example: examples[0])
     }
