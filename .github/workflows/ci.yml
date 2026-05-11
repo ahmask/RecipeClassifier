@@ -35,28 +35,46 @@ jobs:
       - name: Write Job Summary
         if: always()
         run: |
+          # Extract the 40 lines after each model's report header so metrics
+          # from CoreML and Foundation Model are read from their own sections.
+          COREML_SECTION=$(grep -A40 "EVALKIT REPORT.*CoreML" build.log 2>/dev/null || echo "")
+          FM_SECTION=$(grep -A40 "EVALKIT REPORT.*Foundation Model" build.log 2>/dev/null || echo "")
+
+          metric() { echo "$1" | grep "$2" | grep -oE '[0-9]+\.[0-9]+%' | head -1; }
+          latency() { echo "$1" | grep "Latency Mean" | grep -oE '[0-9]+\.[0-9]+ms' | head -1; }
+          verdict() { echo "$1" | grep "Verdict" | sed 's/.*Verdict[^:]*: //' | head -1; }
+
           echo "## 📊 EvalKit Evaluation Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### 🤖 CoreML Classifier" >> $GITHUB_STEP_SUMMARY
           echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
-
-          # Extract printed metrics from xcpretty log
-          LOG=$(grep -r "EVALKIT REPORT\|Accuracy\|Precision\|Recall\|F1\|Latency Mean\|Verdict" build.log 2>/dev/null || echo "")
-
-          ACCURACY=$(echo "$LOG" | grep "Accuracy" | grep -o '[0-9.]*%' | head -1)
-          PRECISION=$(echo "$LOG" | grep "Precision" | grep -o '[0-9.]*%' | head -1)
-          RECALL=$(echo "$LOG" | grep "Recall" | grep -o '[0-9.]*%' | head -1)
-          F1=$(echo "$LOG" | grep "F1" | grep -o '[0-9.]*%' | head -1)
-          LATENCY=$(echo "$LOG" | grep "Latency Mean" | grep -oE '[0-9]+\.[0-9]+ms' | head -1)
-          VERDICT=$(echo "$LOG" | grep "Verdict" | sed 's/.*Verdict.*: //' | head -1)
-
-          echo "| Accuracy | ${ACCURACY:-N/A} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Precision (macro) | ${PRECISION:-N/A} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Recall (macro) | ${RECALL:-N/A} |" >> $GITHUB_STEP_SUMMARY
-          echo "| F1 (macro) | ${F1:-N/A} |" >> $GITHUB_STEP_SUMMARY
-          echo "| Latency Mean | ${LATENCY:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_ACC=$(metric "$COREML_SECTION" "Accuracy");   echo "| Accuracy | ${CML_ACC:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_PRE=$(metric "$COREML_SECTION" "Precision");  echo "| Precision (macro) | ${CML_PRE:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_REC=$(metric "$COREML_SECTION" "Recall");     echo "| Recall (macro) | ${CML_REC:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_F1=$(metric "$COREML_SECTION" "F1");          echo "| F1 (macro) | ${CML_F1:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_LAT=$(latency "$COREML_SECTION");             echo "| Latency Mean | ${CML_LAT:-N/A} |" >> $GITHUB_STEP_SUMMARY
+          CML_VER=$(verdict "$COREML_SECTION")
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Verdict: ${VERDICT:-See test logs}**" >> $GITHUB_STEP_SUMMARY
+          echo "**Verdict: ${CML_VER:-See test logs}**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### 🧠 Foundation Model" >> $GITHUB_STEP_SUMMARY
+          if [ -n "$FM_SECTION" ]; then
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            FM_ACC=$(metric "$FM_SECTION" "Accuracy");    echo "| Accuracy | ${FM_ACC:-N/A} |" >> $GITHUB_STEP_SUMMARY
+            FM_PRE=$(metric "$FM_SECTION" "Precision");   echo "| Precision (macro) | ${FM_PRE:-N/A} |" >> $GITHUB_STEP_SUMMARY
+            FM_REC=$(metric "$FM_SECTION" "Recall");      echo "| Recall (macro) | ${FM_REC:-N/A} |" >> $GITHUB_STEP_SUMMARY
+            FM_F1=$(metric "$FM_SECTION" "F1");           echo "| F1 (macro) | ${FM_F1:-N/A} |" >> $GITHUB_STEP_SUMMARY
+            FM_LAT=$(latency "$FM_SECTION");              echo "| Latency Mean | ${FM_LAT:-N/A} |" >> $GITHUB_STEP_SUMMARY
+            FM_VER=$(verdict "$FM_SECTION")
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Verdict: ${FM_VER:-See test logs}**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "_Skipped — Apple Intelligence not available on this runner._" >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Upload Test Results
         if: always()
