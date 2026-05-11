@@ -20,10 +20,6 @@ jobs:
       - name: Install xcpretty
         run: gem install xcpretty
 
-      - name: Install iOS Simulator Runtime
-        run: |
-          sudo xcodebuild -downloadPlatform iOS
-
       - name: Build and Test
         run: |
           xcodebuild test \
